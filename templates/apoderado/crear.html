@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+{% block title %}Nuevo Apoderado{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-primary text-white py-3">
+                <h4 class="m-0">👤 Registrar Nuevo Apoderado</h4>
+            </div>
+            <div class="card-body p-4">
+                {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nombre Completo</label>
+                        <input type="text" name="nombre" class="form-control" required placeholder="Ej: Juan Carlos Pérez">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">RUT</label>
+                        <input type="text" name="rut" class="form-control" required placeholder="Ej: 12.345.678-9">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Teléfono</label>
+                        <input type="text" name="telefono" class="form-control" placeholder="+56 9 ...">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Correo Electrónico</label>
+                        <input type="email" name="correo" class="form-control" placeholder="correo@ejemplo.com">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Dirección</label>
+                        <input type="text" name="direccion" class="form-control" placeholder="Av. Ejemplo 123">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">💾 Guardar Apoderado</button>
+                        <a href="{{ url_for('apoderado.index') }}" class="btn btn-outline-secondary">❌ Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

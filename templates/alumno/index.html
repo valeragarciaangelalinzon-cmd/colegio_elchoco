@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block title %}Alumnos - Colegio El Choco{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>👨‍🎓 Listado de Alumnos</h2>
+    <a href="{{ url_for('alumno.crear') }}" class="btn btn-success">➕ Registrar Alumno</a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-3">ID</th>
+                        <th>Nombre</th>
+                        <th>RUT</th>
+                        <th>Curso</th>
+                        <th>Apoderado</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alumno in alumnos %}
+                    <tr>
+                        <td class="ps-3 fw-bold text-secondary">{{ alumno.id_alumno }}</td>
+                        <td class="fw-semibold">{{ alumno.nombre }}</td>
+                        <td>{{ alumno.rut }}</td>
+                        <td><span class="badge bg-info text-dark">{{ alumno.curso }}</span></td>
+                        <td>👤 {{ alumno.apoderado }}</td>
+                        <td class="text-center">
+                            <a href="{{ url_for('alumno.editar', id_alumno=alumno.id_alumno) }}" class="btn btn-warning btn-sm me-1">✏️️ Editar</a>
+                            <a href="{{ url_for('alumno.eliminar', id_alumno=alumno.id_alumno) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar este alumno?')">🗑️ Eliminar</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center py-4 text-muted">No hay alumnos registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

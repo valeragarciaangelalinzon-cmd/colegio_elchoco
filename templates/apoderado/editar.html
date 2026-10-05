@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block title %}Editar Apoderado{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-warning py-3">
+                <h4 class="m-0">✏️ Editar Apoderado</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Nombre Completo</label>
+                        <input type="text" name="nombre" class="form-control" value="{{ apoderado.nombre }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">RUT</label>
+                        <input type="text" name="rut" class="form-control" value="{{ apoderado.rut }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Teléfono</label>
+                        <input type="text" name="telefono" class="form-control" value="{{ apoderado.telefono or '' }}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Correo Electrónico</label>
+                        <input type="email" name="correo" class="form-control" value="{{ apoderado.correo or '' }}">
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Dirección</label>
+                        <input type="text" name="direccion" class="form-control" value="{{ apoderado.direccion or '' }}">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning">💾 Guardar Cambios</button>
+                        <a href="{{ url_for('apoderado.index') }}" class="btn btn-outline-secondary">❌ Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

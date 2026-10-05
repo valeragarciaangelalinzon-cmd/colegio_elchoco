@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+{% block title %}Editar Matrícula{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-header bg-warning py-3">
+                <h4 class="m-0">✏️ Editar Matrícula</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Alumno</label>
+                        <select name="id_alumno" class="form-select" required>
+                            {% for alumno in alumnos %}
+                            <option value="{{ alumno.id_alumno }}" {% if alumno.id_alumno == matricula.id_alumno %}selected{% endif %}>
+                                {{ alumno.nombre }} ({{ alumno.curso }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Fecha de Matrícula</label>
+                        <input type="date" name="fecha_matricula" class="form-control" value="{{ matricula.fecha_matricula }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Año Lectivo</label>
+                        <input type="number" name="anio_lectivo" class="form-control" value="{{ matricula.anio_lectivo }}" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Observaciones</label>
+                        <textarea name="observaciones" class="form-control" rows="3">{{ matricula.observaciones or '' }}</textarea>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-warning">💾 Guardar Cambios</button>
+                        <a href="{{ url_for('matricula.index') }}" class="btn btn-outline-secondary">❌ Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

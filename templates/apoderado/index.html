@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% block title %}Apoderados - Colegio El Choco{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>👥 Listado de Apoderados</h2>
+    <a href="{{ url_for('apoderado.crear') }}" class="btn btn-primary">➕ Registrar Apoderado</a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-3">ID</th>
+                        <th>Nombre</th>
+                        <th>RUT</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th class="text-center">Alumnos a Cargo</th>
+                        <th class="text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for apoderado in apoderados %}
+                    <tr>
+                        <td class="ps-3 fw-bold text-secondary">{{ apoderado.id_apoderado }}</td>
+                        <td class="fw-semibold">{{ apoderado.nombre }}</td>
+                        <td>{{ apoderado.rut }}</td>
+                        <td>{{ apoderado.telefono or '—' }}</td>
+                        <td>{{ apoderado.correo or '—' }}</td>
+                        <td class="text-center"><span class="badge bg-primary rounded-pill">{{ apoderado.cantidad_alumnos }}</span></td>
+                        <td class="text-center">
+                            <a href="{{ url_for('apoderado.editar', id_apoderado=apoderado.id_apoderado) }}" class="btn btn-warning btn-sm me-1">✏️ Editar</a>
+                            <a href="{{ url_for('apoderado.eliminar', id_apoderado=apoderado.id_apoderado) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro de eliminar este apoderado?')">🗑️ Eliminar</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center py-4 text-muted">No hay apoderados registrados.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
